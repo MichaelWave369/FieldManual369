@@ -1,0 +1,49 @@
+/* The Parallax Builder Curriculum poster collection */
+.poster-warning{border:1px solid #8c734d;background:linear-gradient(115deg,#322d25,#202f35);border-radius:9px;padding:16px 20px;margin:20px 0 25px}
+.poster-warning strong{font-size:10px;color:#f3c27d;letter-spacing:.14em}
+.poster-warning p{font-size:12px;color:#ccbd9f;line-height:1.65;margin:8px 0 0}
+.poster-toolbar{display:flex;align-items:stretch;gap:13px;flex-wrap:wrap;margin-bottom:10px}
+.poster-toolbar .search-input{min-width:240px}
+.poster-select{display:flex;flex-direction:column;gap:4px;padding:5px 11px;background:#112236;border:1px solid #2b4357;border-radius:8px;color:#8ba9be;font-size:9px;letter-spacing:.1em;font-weight:800}
+.poster-select select{min-width:180px;background:#112236;color:#e0edf4;border:0;padding:3px 0;font-size:12px;outline-offset:2px}
+.poster-count{margin:18px 0;color:#85a2b7;font-size:10px;letter-spacing:.13em;font-weight:800}
+.poster-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:45px}
+.poster-tile{text-align:left;border:1px solid #2a475e;border-radius:10px;overflow:hidden;background:#152a3e;padding:0;color:#f1f8fc;transition:transform .15s,border-color .15s;display:flex;flex-direction:column;min-width:0}
+.poster-tile:hover{transform:translateY(-3px);border-color:#dbaf71}
+.poster-artwork{background:radial-gradient(ellipse at 60% 30%,#294354,#12253a);aspect-ratio: 3/4.3;overflow:hidden;display:flex;align-items:center;justify-content:center;width:100%}
+.poster-artwork img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.poster-awaiting{display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:11px;padding:22px;color:#a7bed0;height:100%;min-height:160px}
+.poster-awaiting>span{font-size:54px;color:#d4aa72}.poster-awaiting strong{font-size:13px}.poster-awaiting small{font-size:11px;color:#91abbf;line-height:1.6;max-width:260px}
+.poster-tile-info{padding:19px;display:flex;flex-direction:column;gap:9px;flex:1}
+.poster-tile-info span{font-size:9px;color:#83abc0;letter-spacing:.07em}
+.poster-tile-info strong{font:600 18px/1.3 'Space Grotesk',system-ui,sans-serif}
+.poster-tile-info small{font-size:9px;font-weight:800;color:#ecbd76;letter-spacing:.09em;margin-top:auto;padding-top:10px}
+.poster-reader-head{display:flex;gap:18px;justify-content:space-between;align-items:end;margin:38px 0 26px}
+.poster-reader-head h1{font:600 clamp(35px,3.5vw,57px)/1.1 'Space Grotesk',sans-serif;letter-spacing:-.04em;margin:15px 0}
+.poster-reader-head p{font-size:13px;line-height:1.7;color:#acc0d1;max-width:690px;margin:0}
+.poster-reader-head>button{white-space:nowrap;flex-shrink:0}
+.poster-reader-layout{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:19px;align-items:start}
+.poster-reader-image{border-radius:11px;border:1px solid #34536d;background:#0e1e30;overflow:hidden}
+.poster-zoom-trigger{width:100%;display:block;padding:18px;border:0;background:transparent}
+.poster-zoom-trigger img{display:block;width:100%;height:auto;max-width:720px;margin:auto;border-radius:3px;cursor:zoom-in}
+.poster-awaiting.large{min-height:490px}
+.image-caption{text-align:center;border-top:1px solid #304a5b;padding:15px 12px;font-size:10px;color:#90a8bc;letter-spacing:.12em;font-weight:800}
+.poster-reader-side{border:1px solid #314b60;background:#132a3e;border-radius:10px;padding:23px}
+.poster-reader-side h2{font:600 25px 'Space Grotesk',system-ui;letter-spacing:-.035em;margin:15px 0}
+.poster-reader-side p{font-size:12px;line-height:1.8;color:#a7bfce}
+.poster-reader-side .primary-button{display:block;width:100%;text-align:center;margin:21px 0;line-height:1.5}
+.poster-download{font-size:10px;display:block;text-align:center;padding:13px;color:#ecc28e;border:1px solid #536b7c;border-radius:5px;letter-spacing:.08em;font-weight:800}
+.poster-context{border-top:1px solid #304d64;margin-top:26px;padding-top:22px}.poster-context strong{font-size:10px;letter-spacing:.12em;color:#ecc28e}
+.poster-pagination{display:flex;justify-content:space-between;gap:15px;margin:29px 0 50px}
+.poster-pagination button{border:1px solid #365672;background:#142e42;border-radius:6px;padding:15px 17px;color:#efbd77;font-size:10px;letter-spacing:.09em;font-weight:800}
+.poster-pagination button:hover{background:#21445b}
+.poster-dialog{background:#0c1926;color:#eaf3fc;border:1px solid #5e7a8b;border-radius:10px;width:min(98vw,1500px);max-width:98vw;max-height:96vh;padding:0;overflow:auto}
+.poster-dialog::backdrop{background:#03070bee}
+.poster-dialog-head{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 23px;background:#10263a;border-bottom:1px solid #3f5968;z-index:2}
+.poster-dialog-head strong{font-size:14px}.poster-dialog-head button{border:1px solid #d2ad6c;background:#263549;color:#ffe0ae;font-size:11px;padding:10px 13px;border-radius:5px;font-weight:800}
+.poster-dialog>img{display:block;width:auto;max-width:none;min-width:min(900px,100%);height:auto;margin:auto}
+.chapter-posters{display:flex;flex-direction:column;gap:10px;margin:12px 0}.chapter-posters button{text-align:left;background:none;border:0;color:#b7d8e6;font-size:12px;line-height:1.5;padding:4px 0}.chapter-posters button:hover{text-decoration:underline;color:#f1c181}
+@media(max-width:1150px){.poster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.poster-reader-layout{grid-template-columns:minmax(0,1fr) 230px}}
+@media(max-width:780px){.poster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.poster-reader-layout{grid-template-columns:1fr}.poster-reader-head{align-items:start;flex-direction:column}.poster-reader-side{order:2}.poster-select{flex:1}.poster-dialog>img{min-width:100%}}
+@media(max-width:520px){.poster-grid{grid-template-columns:1fr}.poster-toolbar .search-input{min-width:100%}.poster-reader-head h1{font-size:37px}.poster-pagination button{font-size:9px;padding:13px 8px}.poster-artwork{aspect-ratio:3/3.7}}
+@media(prefers-reduced-motion:reduce){.poster-tile{transition:none}}
