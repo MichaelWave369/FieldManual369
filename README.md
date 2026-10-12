@@ -6,7 +6,7 @@
 
 A free, original React/TypeScript reference and experiment environment for thoughtful technology builders. Built around ten disciplines: agent architecture, UX, product strategy, evidence, information architecture, systems thinking, governance, research design, cybersecurity, and data modeling.
 
-## v0.1: What works
+## v0.2: Parallax Builder Curriculum (PR #2)\n\n- 19 learning chapters, including nine recovered topics: knowledge management, graphs/ontologies, RAG, technical specifications (quick and full), human oversight, agent evaluations, event-ledgers, and threat modeling.\n- 21 poster records in six curated collections with poster navigation, accessible zoom, related-chapter links, and graceful missing-artwork indicators.\n- The local binary poster assets are packaged separately and **not present in PR #2 until uploaded manually**. See [Poster asset import](docs/PBC-ASSET-IMPORT.md). **Do not describe the public poster gallery as complete until the images are present and tested.**\n\n## v0.1: What works
 
 - Search, filter, and explore all ten chapters, each with three core lessons, an exercise, guiding principle and primary reading link.
 - Evidence Lab with explicit provenance, source, evidence quality, independent signals, testability, risk and assumptions. Transparent 1–5 **heuristic ceiling**, not a truth classifier or statistical confidence interval.

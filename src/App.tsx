@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { chapters, type Chapter, type Group } from './data';
+import { posters } from './posters';
+import PosterHub from './PosterHub';
 import { createReceipt, evaluateEvidence, type EvidenceInput } from './evidence';
 
-type View = { page: 'library' | 'chapter' | 'lab' | 'map'; chapter?: string };
+type View = { page: 'library' | 'chapter' | 'lab' | 'map' | 'posters' | 'poster'; chapter?: string; poster?: number };
 type Filter = 'All topics' | Group;
 const filters: Filter[] = ['All topics', 'Intelligence', 'Design', 'Research', 'Trust'];
 
@@ -20,6 +22,11 @@ function parseRoute(): View {
   const hash = decodeURIComponent(window.location.hash.slice(1));
   if (hash === 'lab') return {page:'lab'};
   if (hash === 'map') return {page:'map'};
+  if (hash === 'posters') return {page:'posters'};
+  if (hash.startsWith('poster/')) {
+    const poster=Number(hash.slice(7));
+    if(Number.isInteger(poster)&&posters.some(p=>p.number===poster)) return {page:'poster',poster};
+  }
   if (hash.startsWith('chapter/')) {
     const chapter = hash.slice(8);
     if (chapters.some(item => item.id === chapter)) return {page:'chapter', chapter};
@@ -41,6 +48,7 @@ function SideNav({ view, navigate, progress }: {view:View; navigate:(view:View)=
     <div className="nav-caption">THE FIELD GUIDE</div>
     <nav className="main-nav" aria-label="Primary navigation">
       <button className={view.page === 'library' || view.page === 'chapter' ? 'active' : ''} onClick={() => navigate({page:'library'})}><span>▦</span> Chapter Library <i>10</i></button>
+      <button className={view.page === 'posters' || view.page === 'poster' ? 'active' : ''} onClick={() => navigate({page:'posters'})}><span>▤</span> Poster Collection <i>21</i></button>
       <button className={view.page === 'lab' ? 'active' : ''} onClick={() => navigate({page:'lab'})}><span>✳</span> Evidence Lab <i className="live">LIVE</i></button>
       <button className={view.page === 'map' ? 'active' : ''} onClick={() => navigate({page:'map'})}><span>⌘</span> Learning Map</button>
     </nav>
@@ -48,7 +56,7 @@ function SideNav({ view, navigate, progress }: {view:View; navigate:(view:View)=
     <div className="nav-caption">FIELD NOTES</div>
     <p className="side-description">A practical learning environment for engineering systems that deserve to be trusted.</p>
     <div className="side-progress">
-      <div className="side-progress-head"><span>Chapters studied</span><b>{progress.length}/10</b></div>
+      <div className="side-progress-head"><span>Chapters studied</span><b>{progress.length}/{chapters.length}</b></div>
       <div className="progress-track"><div style={{width: (progress.length / chapters.length * 100) + '%'}} /></div>
       <small>Saved privately in this browser</small>
     </div>
@@ -97,13 +105,13 @@ function Library({navigate,progress}:{navigate:(view:View)=>void;progress:string
       </div>
     </header>
     <div className="stat-row">
-      <div><b>10</b><span>CORE CHAPTERS</span></div>
-      <div><b>01</b><span>INTERACTIVE LAB</span></div>
+      <div><b>{chapters.length}</b><span>CORE CHAPTERS</span></div>
+      <div><b>{posters.length}</b><span>CURATED POSTERS</span></div>
       <div><b>∞</b><span>QUESTIONS TO TEST</span></div>
       <div className="stat-mantra"><span>THE METHOD</span><strong>Learn. Test. Build. Verify.</strong></div>
     </div>
     <section className="library-section" id="chapter-grid">
-      <div className="section-head"><div><span className="eyebrow">01 / THE KNOWLEDGE BASE</span><h2>Explore the field<span className="period">.</span></h2><p>Ten interconnected disciplines. One more thoughtful way to build.</p></div><span className="section-meta">LIBRARY / 001—010</span></div>
+      <div className="section-head"><div><span className="eyebrow">01 / THE KNOWLEDGE BASE</span><h2>Explore the field<span className="period">.</span></h2><p>Nineteen connected lessons. One more thoughtful way to build.</p></div><span className="section-meta">LIBRARY / 001—019</span></div>
       <div className="searchbar"><label className="search-input"><span aria-hidden="true">⌕</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search chapters, concepts, or skills…" aria-label="Search chapters"/></label><span className="search-count">{matches.length} RESULTS</span></div>
       <div className="filters" aria-label="Filter chapters">{filters.map(item=><button key={item} onClick={()=>setFilter(item)} className={filter===item?'selected':''} aria-pressed={filter===item}>{item}</button>)}</div>
       <div className="chapter-grid">{matches.map(chapter=><Card key={chapter.id} chapter={chapter} done={progress.includes(chapter.id)} onOpen={()=>navigate({page:'chapter',chapter:chapter.id})}/>)}</div>
@@ -168,13 +176,13 @@ function EvidenceLab() {
 }
 function LearningMap({navigate,progress}:{navigate:(view:View)=>void;progress:string[]}) {
   const phases:[string,string,string[]][]=[
-    ['01','FOUNDATIONS',['ux','information','data']],
-    ['02','DESIGN & ENGINEERING',['product','agents','systems']],
-    ['03','PROVE & PROTECT',['evidence','research','security','governance']],
+    ['01','FOUNDATIONS',['ux','information','data','knowledge-management','knowledge-graphs']],
+    ['02','DESIGN & ENGINEERING',['product','technical-spec-quick','technical-spec-full','agents','rag-vector','systems']],
+    ['03','PROVE & PROTECT',['evidence','research','agent-evals','human-oversight','security','threat-model','governance','event-ledgers']],
   ];
   return <>
     <div className="breadcrumb">FIELD MANUAL / <strong>LEARNING MAP</strong></div>
-    <div className="lab-heading"><span className="eyebrow">THREE PHASES · TEN DISCIPLINES</span><h1>See the whole<span className="period">.</span><br/><em>Learn the parts.</em></h1><p>A suggested route, not a prerequisite chain. Move between ideas whenever a project gives you a reason.</p></div>
+    <div className="lab-heading"><span className="eyebrow">THREE PHASES · NINETEEN CHAPTERS</span><h1>See the whole<span className="period">.</span><br/><em>Learn the parts.</em></h1><p>A suggested route, not a prerequisite chain. Move between ideas whenever a project gives you a reason.</p></div>
     <div className="roadmap">{phases.map(([num,title,ids])=><section key={num} className="roadmap-phase"><div className="phase-heading"><span>{num}</span><h2>{title}</h2><small>{ids.length} CHAPTERS</small></div><div className="map-items">{ids.map(id=>{const chapter=chapters.find(ch=>ch.id===id)!;return <button key={id} onClick={()=>navigate({page:'chapter',chapter:id})} className={'map-chapter '+(progress.includes(id)?'map-done':'')}><span className="map-glyph">{chapter.symbol}</span><span><small>{chapter.number} / {chapter.group}</small><strong>{chapter.title}</strong></span><span aria-hidden="true">{progress.includes(id)?'✓':'↗'}</span></button>;})}</div></section>)}</div>
     <section className="lower-banner compact"><span className="eyebrow">A RESPONSIBLE BUILD CYCLE</span><h2>Learn → Test → Build → Verify</h2><p>Every phase loops back when new evidence arrives. Curiosity opens the door; explicit tests keep us honest.</p><button className="primary-button" onClick={()=>navigate({page:'lab'})}>PRACTICE EVIDENCE GRADING ↗</button></section>
   </>;
@@ -185,7 +193,7 @@ export default function App() {
   useEffect(()=>{const sync=()=>setView(parseRoute());window.addEventListener('hashchange',sync);return()=>window.removeEventListener('hashchange',sync);},[]);
   useEffect(()=>{try{localStorage.setItem('fm369-studied-v1',JSON.stringify(progress));}catch{/* Storage can be disabled. */}},[progress]);
   function navigate(next:View) {
-    const fragment=next.page==='chapter' ? 'chapter/'+next.chapter : next.page==='library'?'':next.page;
+    const fragment=next.page==='chapter' ? 'chapter/'+next.chapter : next.page==='poster' ? 'poster/'+next.poster : next.page==='library'?'':next.page;
     window.location.hash=fragment;
     setView(next);
     window.scrollTo({top:0,behavior:'instant'});
@@ -199,6 +207,9 @@ export default function App() {
       {view.page==='chapter' && chapter && <ChapterPage chapter={chapter} done={progress.includes(chapter.id)} toggle={()=>setProgress(prev=>prev.includes(chapter.id)?prev.filter(id=>id!==chapter.id):[...prev,chapter.id])} navigate={navigate}/>}
       {view.page==='lab' && <EvidenceLab/>}
       {view.page==='map' && <LearningMap navigate={navigate} progress={progress}/>}
+      {(view.page==='posters' || view.page==='poster') && <PosterHub poster={view.page==='poster'?view.poster:undefined}
+        navigate={(page,number)=>navigate({page,poster:number})}
+        openChapter={id=>navigate({page:'chapter',chapter:id})}/>}
       <footer className="footer"><div><strong>✳ FIELDMANUAL369</strong><p>LEARN THE CONCEPT. TEST THE CLAIM. BUILD THE SYSTEM. VERIFY THE RESULT.</p></div><div><span>ORIGINAL WORK · OPEN SOURCE</span><a href="https://github.com/MichaelWave369/FieldManual369" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></div></footer>
     </main>
   </div>;
